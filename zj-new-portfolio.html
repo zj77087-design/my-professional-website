@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b16">
+<meta name="description" content="ZJ — Front-End Web Developer creating modern, responsive and premium websites.">
+<title>ZJ | Front-End Web Developer</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #080b16;
+  --panel: #11182a;
+  --text: #f4f7ff;
+  --muted: #9ca8c2;
+  --cyan: #68e4ff;
+  --violet: #9d8bff;
+  --line: rgba(164,190,255,.15);
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; scroll-padding-top:90px; }
+body {
+  background:radial-gradient(ellipse at 10% 5%,#172044 0%,transparent 35%),var(--bg);
+  color:var(--text);
+  font-family:"DM Sans",sans-serif;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+a { color:inherit; text-decoration:none; }
+button { font:inherit; }
+.container { width:min(1160px,calc(100% - 40px)); margin:auto; }
+.section { padding:100px 0; }
+h1,h2,h3,.brand { font-family:"Space Grotesk",sans-serif; }
+.gradient {
+  background:linear-gradient(100deg,var(--cyan),#a6a0ff,#d8b8ff);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.eyebrow {
+  color:var(--cyan); text-transform:uppercase;
+  font-size:.76rem; font-weight:700; letter-spacing:.18em;
+}
+.section-heading { max-width:700px; margin-bottom:40px; }
+.section-heading h2 {
+  margin-top:12px; font-size:clamp(2.1rem,5vw,3.5rem);
+  line-height:1.15; letter-spacing:-.05em;
+}
+.section-heading p { margin-top:14px; color:var(--muted); }
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  padding:12px 19px; border:1px solid transparent; border-radius:12px;
+  font-weight:700; font-size:.9rem; transition:.25s;
+}
+.btn:hover { transform:translateY(-3px); }
+.btn-primary {
+  color:#07101a; background:linear-gradient(110deg,var(--cyan),#b5caff);
+  box-shadow:0 10px 30px #68e4ff20;
+}
+.btn-outline { border-color:var(--line); background:#ffffff06; }
+.btn-outline:hover { border-color:var(--cyan); }
+
+/* NAVIGATION */
+.site-header {
+  position:fixed; top:0; left:0; width:100%; z-index:1000;
+  transition:.25s;
+}
+.site-header.scrolled {
+  background:#080b16e8; backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.nav-wrap {
+  min-height:78px; display:flex; align-items:center;
+  justify-content:space-between; gap:22px;
+}
+.brand { font-size:1.55rem; font-weight:700; letter-spacing:-.06em; }
+.brand span { color:var(--cyan); }
+.brand small {
+  display:block; margin-top:-7px; color:var(--muted);
+  font:600 .55rem "DM Sans",sans-serif; letter-spacing:.2em;
+}
+.nav-links { display:flex; align-items:center; gap:23px; list-style:none; }
+.nav-links a { color:#c2cbe0; font-size:.86rem; font-weight:600; }
+.nav-links a:hover { color:var(--cyan); }
+.menu-toggle {
+  display:none; width:43px; height:43px; border:1px solid var(--line);
+  background:var(--panel); color:white; border-radius:11px; cursor:pointer;
+}
+
+/* HERO */
+.hero { min-height:740px; padding:155px 0 90px; display:flex; align-items:center; }
+.hero-grid { display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:45px; }
+.availability {
+  display:inline-flex; align-items:center; gap:9px; padding:8px 13px;
+  border:1px solid var(--line); border-radius:30px;
+  background:#ffffff06; font-size:.78rem;
+}
+.status-dot { width:8px; height:8px; border-radius:50%; background:#68e7a5; }
+.hero h1 {
+  margin-top:22px; font-size:clamp(3.2rem,7vw,5.7rem);
+  line-height:1; letter-spacing:-.075em;
+}
+.hero h1 span { display:block; }
+.hero-lead { max-width:580px; margin-top:23px; color:#b0bad0; font-size:1.05rem; }
+.hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+.hero-meta { display:flex; flex-wrap:wrap; gap:20px; margin-top:30px; color:var(--muted); font-size:.82rem; }
+.hero-meta strong { color:var(--text); }
+.hero-art {
+  min-height:400px; position:relative; display:grid; place-items:center;
+}
+.orb {
+  position:absolute; width:340px; max-width:90%; aspect-ratio:1;
+  border-radius:50%; background:radial-gradient(circle,#68e4ff30,#9d8bff14 45%,transparent 70%);
+  animation:float 6s ease-in-out infinite;
+}
+.code-window {
+  position:relative; width:min(390px,100%); padding:20px;
+  border:1px solid #a0bcff35; border-radius:22px;
+  background:linear-gradient(145deg,#172037ed,#0c111fed);
+  box-shadow:0 30px 80px #0006; transform:rotate(2deg);
+}
+.window-top { display:flex; gap:7px; padding-bottom:14px; border-bottom:1px solid var(--line); }
+.dot { width:8px; height:8px; border-radius:50%; background:#ff778b; }
+.dot:nth-child(2) { background:#ffd16d; }
+.dot:nth-child(3) { background:#6de6ad; }
+.window-title { margin-left:auto; color:#8390ad; font-size:.7rem; }
+.code-lines { padding-top:18px; color:#aab7d0; font-size:.82rem; line-height:2.1; }
+.purple { color:#b5a5ff; }
+.blue { color:var(--cyan); }
+.green { color:#8de5ba; }
+.indent { padding-left:20px; }
+.float-chip {
+  position:absolute; padding:10px 14px; border:1px solid var(--line);
+  background:#11182af0; border-radius:13px; box-shadow:0 15px 40px #0004;
+  font-size:.78rem; font-weight:700;
+}
+.float-chip span { color:var(--cyan); }
+.chip-one { top:55px; right:-5px; }
+.chip-two { bottom:42px; left:-10px; }
+@keyframes float { 50% { transform:translateY(-12px); } }
+
+/* QUICK FACTS */
+.trust-strip { border-block:1px solid var(--line); background:#ffffff03; }
+.trust-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+.trust-item { padding:24px 12px; text-align:center; border-right:1px solid var(--line); }
+.trust-item:last-child { border-right:0; }
+.trust-item strong { display:block; font-family:"Space Grotesk"; }
+.trust-item span { color:var(--muted); font-size:.78rem; }
+
+/* ABOUT */
+.about-grid { display:grid; grid-template-columns:.8fr 1.2fr; align-items:center; gap:55px; }
+.about-visual {
+  min-height:370px; display:grid; place-items:center; position:relative;
+  border:1px solid var(--line); border-radius:26px; overflow:hidden;
+  background:radial-gradient(circle,#35416b75,transparent 65%),var(--panel);
+}
+.avatar {
+  width:180px; aspect-ratio:1; display:grid; place-items:center; border-radius:50%;
+  font:700 5rem "Space Grotesk"; letter-spacing:-.1em; color:var(--cyan);
+  border:1px solid #68e4ff70; background:#68e4ff0c;
+  box-shadow:0 0 60px #68e4ff18;
+}
+.about-badge {
+  position:absolute; bottom:20px; left:20px; right:20px; padding:12px;
+  text-align:center; background:#080b16dd; border:1px solid var(--line);
+  border-radius:12px; font-size:.82rem;
+}
+.about-copy h3 { margin-top:12px; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.25; }
+.about-copy p { margin-top:15px; color:var(--muted); }
+.about-points { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:23px; }
+.about-point { font-size:.86rem; }
+.check { color:var(--cyan); margin-right:7px; }
+
+/* SKILLS */
+.skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:17px; }
+.skill-card,.service-card,.project-card {
+  border:1px solid var(--line); border-radius:20px;
+  background:linear-gradient(145deg,#141d32d6,#0c111fcc);
+  transition:transform .28s,border-color .28s,box-shadow .28s;
+}
+.skill-card { padding:23px; }
+.skill-card:hover,.service-card:hover,.project-card:hover {
+  transform:translateY(-5px); border-color:#68e4ff60;
+  box-shadow:0 18px 45px #0003;
+}
+.skill-top { display:flex; align-items:center; gap:12px; }
+.skill-icon {
+  width:43px; height:43px; display:grid; place-items:center;
+  border-radius:12px; color:var(--cyan); background:#68e4ff12;
+  border:1px solid #68e4ff20; font-weight:800;
+}
+.skill-card p { margin-top:14px; color:var(--muted); font-size:.83rem; }
+.skill-track { height:5px; margin-top:19px; border-radius:20px; background:#ffffff12; overflow:hidden; }
+.skill-track span { display:block; height:100%; background:linear-gradient(90deg,var(--cyan),var(--violet)); }
+
+/* SERVICES */
+.services-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.service-card { padding:24px 21px; }
+.service-icon {
+  width:48px; height:48px; display:grid; place-items:center;
+  border-radius:14px; color:var(--cyan); background:#68e4ff12;
+  border:1px solid #68e4ff22; font-size:1.3rem;
+}
+.service-card h3 { margin-top:19px; font-size:1.05rem; }
+.service-card p { margin-top:9px; color:var(--muted); font-size:.83rem; }
+
+/* PROJECTS */
+.projects-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; }
+.project-card { overflow:hidden; display:flex; flex-direction:column; }
+.project-image-wrap { height:220px; overflow:hidden; background:#131c31; }
+.project-image { width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+.project-card:hover .project-image { transform:scale(1.04); }
+.project-content { padding:23px; display:flex; flex-direction:column; flex:1; }
+.project-number { color:var(--cyan); font-size:.68rem; font-weight:700; letter-spacing:.13em; }
+.project-card h3 { margin-top:9px; font-size:1.4rem; }
+.project-card p { margin-top:9px; color:var(--muted); font-size:.87rem; }
+.project-tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:16px; }
+.project-tags span { padding:4px 9px; border:1px solid var(--line); border-radius:7px; color:#c7d3ea; font-size:.7rem; }
+.project-actions { display:flex; flex-wrap:wrap; gap:9px; margin-top:auto; padding-top:20px; }
+.project-btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:9px 13px; border-radius:9px; color:var(--cyan);
+  background:#68e4ff10; border:1px solid #68e4ff30; font-size:.8rem; font-weight:700;
+}
+.project-btn:hover { background:#68e4ff20; }
+.secondary-btn { color:#d2d9ec; background:#ffffff06; border-color:var(--line); }
+</style>
+</head>
+
+<body>
+<header class="site-header" id="siteHeader">
+  <div class="container nav-wrap">
+    <a class="brand" href="#home">ZJ<span>.</span><small>WEB DEVELOPER</small></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn btn-primary nav-cta" href="#contact">Let's Talk ↗</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="availability"><span class="status-dot"></span> Available for Web Projects</div>
+      <p class="eyebrow" style="margin-top:25px">Hello, I'm Zeeshan</p>
+      <h1>Building digital <span class="gradient">experiences.</span></h1>
+      <p class="hero-lead">I'm a front-end web developer focused on building modern, responsive and user-friendly websites that help ideas and businesses stand out online.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#projects">Explore My Work ↘</a>
+        <a class="btn btn-outline" href="#contact">Get In Touch</a>
+      </div>
+      <div class="hero-meta"><span><strong>Creative</strong> design</span><span><strong>Responsive</strong> layouts</span><span><strong>Clean</strong> code</span></div>
+    </div>
+    <div class="hero-art">
+      <div class="orb"></div>
+      <div class="code-window">
+        <div class="window-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="window-title">portfolio.html</span></div>
+        <div class="code-lines">
+          <div><span class="purple">&lt;section</span> <span class="blue">class</span>=<span class="green">"future"</span><span class="purple">&gt;</span></div>
+          <div class="indent"><span class="purple">&lt;h1&gt;</span>Ideas into reality<span class="purple">&lt;/h1&gt;</span></div>
+          <div class="indent"><span class="purple">&lt;p&gt;</span>Design. Build. Improve.<span class="purple">&lt;/p&gt;</span></div>
+          <div><span class="purple">&lt;/section&gt;</span></div><br>
+          <div><span class="blue">const</span> passion = <span class="green">"web development"</span>;</div>
+          <div><span class="blue">const</span> nextStep = <span class="green">"keep creating"</span>;</div>
+        </div>
+      </div>
+      <div class="float-chip chip-one"><span>✦</span> Modern UI</div>
+      <div class="float-chip chip-two"><span>⌘</span> Responsive Code</div>
+    </div>
+  </div>
+</section>
+
+<div class="trust-strip">
+  <div class="container trust-grid">
+    <div class="trust-item"><strong>Web Design</strong><span>Clean & modern</span></div>
+    <div class="trust-item"><strong>Development</strong><span>Built with care</span></div>
+    <div class="trust-item"><strong>Mobile Ready</strong><span>Responsive layouts</span></div>
+    <div class="trust-item"><strong>Always Learning</strong><span>Growing every project</span></div>
+  </div>
+</div>
+
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="about-visual reveal">
+      <div class="avatar">ZJ</div>
+      <div class="about-badge">Front-End Developer · Creative Problem Solver</div>
+    </div>
+    <div class="about-copy reveal">
+      <div class="section-heading" style="margin-bottom:0">
+        <span class="eyebrow">About Me</span>
+        <h2>Turning ideas into <span class="gradient">digital reality.</span></h2>
+      </div>
+      <p>I'm Zeeshan, a front-end web developer who enjoys creating polished websites with thoughtful layouts, clear content and smooth user experiences.</p>
+      <p>I keep improving by building real projects and exploring modern web design. My goal is to create websites that look professional and work smoothly across devices.</p>
+      <div class="about-points">
+        <div class="about-point"><span class="check">✓</span>Responsive layouts</div>
+        <div class="about-point"><span class="check">✓</span>Modern visual design</div>
+        <div class="about-point"><span class="check">✓</span>Business websites</div>
+        <div class="about-point"><span class="check">✓</span>Continuous learning</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="skills" style="background:#ffffff03;border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">My Toolkit</span>
+      <h2>Skills that bring <span class="gradient">ideas to life.</span></h2>
+      <p>My current front-end toolkit, focused on responsive, polished web experiences.</p>
+    </div>
+    <div class="skills-grid">
+      <article class="skill-card reveal"><div class="skill-top"><div class="skill-icon">5</div><strong>HTML</strong></div><p>Semantic structure and organized content.</p><div class="skill-track"><span style="width:90%"></span></div></article>
+      <article class="skill-card reveal"><div class="skill-top"><div class="skill-icon">✳</div><strong>CSS</strong></div><p>Layouts, visual styling and responsive design.</p><div class="skill-track"><span style="width:75%"></span></div></article>
+      <article class="skill-card reveal"><div class="skill-top"><div class="skill-icon">JS</div><strong>JavaScript</strong></div><p>Interactive elements and front-end behavior.</p><div class="skill-track"><span style="width:50%"></span></div></article>
+      <article class="skill-card reveal"><div class="skill-top"><div class="skill-icon">⌘</div><strong>Responsive Design</strong></div><p>Layouts for phones, tablets and desktops.</p><div class="skill-track"><span style="width:78%"></span></div></article>
+      <article class="skill-card reveal"><div class="skill-top"><div class="skill-icon">GH</div><strong>GitHub Pages</strong></div><p>Publishing practice projects online.</p><div class="skill-track"><span style="width:72%"></span></div></article>
+      <article class="skill-card reveal"><div class="skill-top"><div class="skill-icon">✦</div><strong>UI Design</strong></div><p>Visual hierarchy, spacing and polished interfaces.</p><div class="skill-track"><span style="width:70%"></span></div></article>
+    </div>
+    <p style="margin-top:15px;color:var(--muted);font-size:.76rem">Skill indicators are approximate self-assessments.</p>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">What I Do</span>
+      <h2>Websites built with <span class="gradient">purpose.</span></h2>
+      <p>Practical website solutions designed to present your brand clearly and give visitors a smooth experience.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service-card reveal"><div class="service-icon">◈</div><h3>Business Websites</h3><p>Professional pages for businesses, services and contact details.</p></article>
+      <article class="service-card reveal"><div class="service-icon">✧</div><h3>Modern UI Design</h3><p>Clean layouts with thoughtful spacing, typography and color.</p></article>
+      <article class="service-card reveal"><div class="service-icon">▣</div><h3>Responsive Websites</h3><p>Layouts designed for mobile, tablet and desktop screens.</p></article>
+      <article class="service-card reveal"><div class="service-icon">↗</div><h3>Landing Pages</h3><p>Focused pages that communicate a product or service clearly.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="projects" style="background:#ffffff03;border-block:1px solid var(--line)">
+  <div class="container">
+    <div class="section-heading reveal">
+      <span class="eyebrow">Selected Work</span>
+      <h2>Projects built with <span class="gradient">care.</span></h2>
+      <p>Explore my website projects and concept designs through their live demos.</p>
+    </div>
+    <div class="projects-grid">
+          <article class="project-card reveal">
+        <div class="project-image-wrap">
+          <img class="project-image"
+               src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=85"
+               alt="Electrical cable business website"
+               loading="lazy">
+        </div>
+        <div class="project-content">
+          <span class="project-number">PROJECT 01 / BUSINESS</span>
+          <h3>A.M. Cables</h3>
+          <p>A premium website concept for an electrical cable business, featuring product browsing, product details and WhatsApp inquiries.</p>
+          <div class="project-tags">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Business Website</span>
+          </div>
+          <div class="project-actions">
+            <a class="project-btn" href="https://zj77087-design.github.io/am-cables-ultra-premium/" target="_blank" rel="noopener noreferrer">Live Website ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-image-wrap">
+          <img class="project-image"
+               src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=85"
+               alt="Luxury real estate website concept"
+               loading="lazy">
+        </div>
+        <div class="project-content">
+          <span class="project-number">PROJECT 02 / CONCEPT</span>
+          <h3>AUREVIA ESTATES</h3>
+          <p>A luxury real estate website concept with elegant visuals and a refined presentation for premium properties.</p>
+          <div class="project-tags">
+            <span>Luxury UI</span><span>Responsive Design</span><span>Real Estate</span>
+          </div>
+          <div class="project-actions">
+            <a class="project-btn" href="https://zj77087-design.github.io/aurevia-estates/" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-image-wrap">
+          <img class="project-image"
+               src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=85"
+               alt="Restaurant website project"
+               loading="lazy">
+        </div>
+        <div class="project-content">
+          <span class="project-number">PROJECT 03 / RESTAURANT</span>
+          <h3>Food House</h3>
+          <p>A restaurant website project designed to showcase food, present restaurant information and provide an online ordering experience.</p>
+          <div class="project-tags">
+            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Restaurant</span>
+          </div>
+          <div class="project-actions">
+            <a class="project-btn" href="https://zj77087-design.github.io/food-house-website/" target="_blank" rel="noopener noreferrer">Live Website ↗</a>
+            <a class="project-btn secondary-btn" href="https://github.com/zj77087-design/food-house-website" target="_blank" rel="noopener noreferrer">View Code ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-image-wrap">
+          <img class="project-image"
+               src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=85"
+               alt="Digital agency website concept"
+               loading="lazy">
+        </div>
+        <div class="project-content">
+          <span class="project-number">PROJECT 04 / DIGITAL</span>
+          <h3>NEXORA DIGITAL</h3>
+          <p>A digital agency website concept with a modern visual identity and a clean presentation for online services.</p>
+          <div class="project-tags">
+            <span>Web Design</span><span>Agency</span><span>Responsive UI</span>
+          </div>
+          <div class="project-actions">
+            <a class="project-btn" href="https://zj77087-design.github.io/nexora-digital/" target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-panel reveal">
+      <div class="contact-copy">
+        <span class="eyebrow">Let's Connect</span>
+        <h2>Have an idea? Let's build something <span class="gradient">great.</span></h2>
+        <p>Need a modern website for your business or project? Contact me to discuss your idea and the next steps.</p>
+        <div class="contact-actions">
+          <a class="btn btn-primary"
+             href="https://wa.me/923055078997?text=Hi%20Zeeshan%2C%20I%20want%20to%20discuss%20a%20website%20project."
+             target="_blank" rel="noopener noreferrer">Chat on WhatsApp ↗</a>
+          <a class="btn btn-outline"
+             href="https://github.com/zj77087-design"
+             target="_blank" rel="noopener noreferrer">My GitHub ↗</a>
+        </div>
+      </div>
+      <div class="contact-side">
+        <div class="contact-detail">
+          <span class="contact-symbol">↗</span>
+          <div><small>Preferred Contact</small><strong>WhatsApp</strong></div>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-symbol">⌘</span>
+          <div><small>Code & Projects</small><strong>GitHub Profile</strong></div>
+        </div>
+        <div class="contact-note">Tell me about your idea, goals and the type of website you need.</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a class="brand" href="#home">ZJ<span>.</span><small>WEB DEVELOPER</small></a>
+    <p>Designed with purpose. Built with passion.</p>
+    <a class="back-top" href="#home">Back to top ↑</a>
+  </div>
+  <div class="container copyright">
+    © <span id="currentYear">2026</span> ZJ. Portfolio and selected projects.
+  </div>
+</footer>
+
+<style>
+/* CONTACT */
+.contact-panel {
+  display:grid; grid-template-columns:1.2fr .8fr; gap:40px;
+  padding:clamp(25px,5vw,55px); border:1px solid #68e4ff30;
+  border-radius:27px;
+  background:radial-gradient(ellipse at 5% 0%,#68e4ff12,transparent 55%),
+             linear-gradient(140deg,#141d32,#0c111e);
+}
+.contact-copy h2 {
+  margin-top:13px; max-width:650px;
+  font:700 clamp(2.1rem,5vw,3.5rem)/1.12 "Space Grotesk",sans-serif;
+  letter-spacing:-.055em;
+}
+.contact-copy p { max-width:530px; margin-top:16px; color:var(--muted); }
+.contact-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:25px; }
+.contact-side {
+  align-self:center; padding:23px; border:1px solid var(--line);
+  border-radius:18px; background:#080b1670;
+}
+.contact-detail { display:flex; align-items:center; gap:13px; padding:13px 0; }
+.contact-detail + .contact-detail { border-top:1px solid var(--line); }
+.contact-symbol {
+  display:grid; place-items:center; width:43px; height:43px;
+  border:1px solid #68e4ff25; background:#68e4ff10;
+  color:var(--cyan); border-radius:12px;
+}
+.contact-detail small { display:block; color:var(--muted); font-size:.75rem; }
+.contact-detail strong { display:block; margin-top:3px; }
+.contact-note {
+  margin-top:12px; padding-top:17px; border-top:1px solid var(--line);
+  color:var(--muted); font-size:.82rem;
+}
+
+/* FOOTER */
+.site-footer { border-top:1px solid var(--line); background:#060811; }
+.footer-inner {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:20px; padding:30px 0;
+}
+.footer-inner p { color:var(--muted); font-size:.82rem; }
+.back-top { color:var(--cyan); font-size:.85rem; font-weight:700; }
+.copyright {
+  padding:16px 0 24px; border-top:1px solid var(--line);
+  color:#8390a8; text-align:center; font-size:.75rem;
+}
+
+/* REVEAL ANIMATIONS */
+.reveal { opacity:0; transform:translateY(18px); transition:opacity .65s,transform .65s; }
+.reveal.show { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width:1000px) {
+  .nav-links { gap:14px; }
+  .nav-links a { font-size:.8rem; }
+  .nav-cta { display:none; }
+  .hero-grid { gap:25px; }
+  .services-grid { grid-template-columns:repeat(2,1fr); }
+  .about-grid { gap:30px; }
+}
+@media (max-width:760px) {
+  .container { width:min(100% - 32px,600px); }
+  .section { padding:76px 0; }
+  .nav-wrap { min-height:70px; }
+  .menu-toggle { display:block; margin-left:auto; font-size:1.2rem; }
+  .nav-links {
+    display:none; position:absolute; top:70px; left:16px; right:16px;
+    padding:13px; flex-direction:column; align-items:stretch; gap:0;
+    background:#101729f7; backdrop-filter:blur(18px);
+    border:1px solid var(--line); border-radius:15px;
+    box-shadow:0 20px 45px #0007;
+  }
+  .nav-links.open { display:flex; }
+  .nav-links li a { display:block; padding:12px; border-radius:8px; font-size:.9rem; }
+  .nav-links li a:hover { background:#68e4ff0c; }
+  .hero { min-height:auto; padding:130px 0 65px; }
+  .hero-grid { grid-template-columns:1fr; }
+  .hero h1 { font-size:clamp(3.15rem,12vw,5rem); }
+  .hero-art { min-height:340px; margin-top:8px; }
+  .code-window { width:min(360px,90%); }
+  .chip-one { right:0; }
+  .chip-two { left:0; }
+  .trust-grid { grid-template-columns:repeat(2,1fr); }
+  .trust-item:nth-child(2) { border-right:0; }
+  .trust-item:nth-child(-n+2) { border-bottom:1px solid var(--line); }
+  .about-grid { grid-template-columns:1fr; }
+  .about-visual { min-height:300px; }
+  .skills-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .projects-grid { grid-template-columns:1fr; }
+  .project-image-wrap { height:230px; }
+  .contact-panel { grid-template-columns:1fr; gap:24px; }
+  .footer-inner { flex-wrap:wrap; }
+}
+@media (max-width:420px) {
+  .skills-grid,.services-grid { grid-template-columns:1fr; }
+  .about-points { grid-template-columns:1fr; }
+  .hero-actions .btn,.contact-actions .btn { width:100%; }
+  .hero-meta { gap:12px; }
+  .project-actions .project-btn { flex:1; }
+  .footer-inner { flex-direction:column; align-items:flex-start; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    scroll-behavior:auto !important;
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+  }
+  .reveal { opacity:1; transform:none; }
+}
+</style>
+<script>
+  // Current year in footer
+  const yearElement = document.getElementById("currentYear");
+
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  // Mobile navigation
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (menuToggle && navLinks) {
+    menuToggle.setAttribute("aria-expanded", "false");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation menu" : "Open navigation menu"
+      );
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        navLinks.classList.contains("open") &&
+        !navLinks.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+      }
+    });
+  }
+
+  // Reveal elements as they enter the screen
+  const revealElements = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+  } else {
+    revealElements.forEach((element) => {
+      element.classList.add("show");
+    });
+  }
+
+  // Smooth scrolling for internal links
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const targetId = link.getAttribute("href");
+
+      if (!targetId || targetId === "#") return;
+
+      const target = document.querySelector(targetId);
+
+      if (target) {
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth",
+          block: "start"
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
